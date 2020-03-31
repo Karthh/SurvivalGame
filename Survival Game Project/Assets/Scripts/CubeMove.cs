@@ -6,9 +6,16 @@ public class CubeMove : MonoBehaviour
 {
     // Start is called before the first frame update
     public float moveSpeed;
+    [SerializeField]
+    private float name;
+    public GameObject cube;
+    public GameObject goblin;
     void Start()
     {
-        
+        cube = GameObject.Find("Cube");
+        cube.transform.Translate(1.0f, 0.0f, 0.0f);
+        goblin = GameObject.FindGameObjectWithTag("Enemy");
+        goblin.GetComponent<Entity>().name = "Bob";
     }
 
     // Update is called once per frame
