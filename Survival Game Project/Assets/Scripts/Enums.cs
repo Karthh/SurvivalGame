@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : Entity
+public class Enums : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        this.health = 10;
-        this.name = "Goblin";
+        
     }
 
     // Update is called once per frame

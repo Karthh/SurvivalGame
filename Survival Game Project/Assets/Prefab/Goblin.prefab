@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 782913502661283986}
   - component: {fileID: 782913502661283985}
   - component: {fileID: 782913502661283984}
+  - component: {fileID: 8538398946803436609}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Enemy
@@ -94,5 +95,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838c6006d6ac91845b0871416db1f1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 8
-  name: Bob
+  enitityName: 
+  maxHealth: 0
+  currentHealth: 0
+  strength: 0
+  magic: 0
+  physicalDefense: 0
+  magicalDefence: 0
+  moveSpeed: 0
+  resource: 0
+  player: {fileID: 0}
+  attackRange: 0
+  distanceFromPlayer: 0
+--- !u!95 &8538398946803436609
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782913502661283987}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 897a7819de63e4d419caedc65cf47b35, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
