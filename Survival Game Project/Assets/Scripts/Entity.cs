@@ -1,22 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum AnimationStates
+{
+    IS_MOVING = 0,
+    IS_ATTACKING = 1
+}
 public abstract class Entity : MonoBehaviour
 {
     // Start is called before the first frame update
-    public string enitityName;
-    public float maxHealth;
-    public float currentHealth;
+    public string enitityName; //the entities name
+    #region Entity Stats
+    public float maxHealth; //maximum health threshold
+    public float currentHealth; //entities current health
     public float strength;
     public float magic;
     public float physicalDefense;
     public float magicalDefence;
     public float moveSpeed;
     public float resource;
-
+    #endregion
+    #region GameObject Components
     public Animator animator;
-   // public Dictionary<string, float> stats;
+    public SpriteRenderer spriteRenderer;
+    #endregion
+    public Dictionary<AnimationStates, string> animationStates;
     public virtual void Start()
     {
         InitializeStats();
@@ -29,21 +37,22 @@ public abstract class Entity : MonoBehaviour
     }
     public virtual void InitializeStats()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        InitializeAnimationStates();
         currentHealth = maxHealth;
     }
-    /*
-    public virtual void InitializeStats()
+    
+    public virtual void InitializeAnimationStates()
     {
-        stats = new Dictionary<string, float>();
-        stats.Add("Health", 0.0f);
-        stats.Add("Strength", 0.0f);
-        stats.Add("Magic", 0.0f);
-        stats.Add("Physical Defense", 0.0f);
-        stats.Add("Magical Defense", 0.0f);
-        stats.Add("Movement Speed", 0.0f);
-        stats.Add("Resource", 0.0f);
+        animationStates = new Dictionary<AnimationStates, string>();
+        animationStates.Add(AnimationStates.IS_MOVING, "isMoving");
+        animationStates.Add(AnimationStates.IS_ATTACKING, "isAttacking");
     }
+    public abstract void Movement(GameObject target);
+    public abstract IEnumerator Attack(GameObject target, AnimationStates previousStates);
+
+    /*
     void InitializeStats(float health, float strength, float magic, float physicalDefense, float magicalDefense, float moveSpeed, float resource)
     {
         stats = new Dictionary<string, float>();

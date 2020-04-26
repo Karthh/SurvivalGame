@@ -219,33 +219,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
-      propertyPath: enitityName
-      value: Rob
-      objectReference: {fileID: 0}
-    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
-        type: 3}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
-        type: 3}
-      propertyPath: strength
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
-        type: 3}
       propertyPath: player
+      value: 
+      objectReference: {fileID: 1479781850}
+    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: target
       value: 
       objectReference: {fileID: 660329243}
     - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
       propertyPath: attackRange
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: attackDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: attackCoolDown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 782913502661283986, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
@@ -306,6 +301,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rob_Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 1137499855937497058, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163628018334274306, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.322
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b0eebb7cf171134abdce196a891b39a, type: 3}
@@ -419,6 +424,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1773981655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 782913502661283987, guid: 2b0eebb7cf171134abdce196a891b39a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1478287183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &782913502186493519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,14 +437,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 475350754, guid: 2b0eebb7cf171134abdce196a891b39a, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1773981655}
+    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: attackDuration
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: attackCoolDown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: attackRange
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 782913502661283986, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
@@ -494,6 +516,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3163628018334274306, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.322
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b0eebb7cf171134abdce196a891b39a, type: 3}

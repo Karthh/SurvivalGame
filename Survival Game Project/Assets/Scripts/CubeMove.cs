@@ -15,7 +15,7 @@ public class CubeMove : MonoBehaviour
         cube = GameObject.Find("Cube");
         cube.transform.Translate(1.0f, 0.0f, 0.0f);
         goblin = GameObject.FindGameObjectWithTag("Enemy");
-        goblin.GetComponent<Entity>().name = "Bob";
+        //goblin.GetComponent<Entity>().name = "Bob";
     }
 
     // Update is called once per frame
