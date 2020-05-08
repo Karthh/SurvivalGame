@@ -86,6 +86,11 @@ public class Enemy : Entity
         }
         
     }
+    public override void OnTriggerEnter2D(Collider2D col)
+    {
+        base.OnTriggerEnter2D(col);
+        Debug.Log("I've been hit");
+    }
     public override IEnumerator Attack(GameObject target, AnimationStates previousState)
     {
         attackCD = true; //set cooldown to true
