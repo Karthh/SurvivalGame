@@ -10,7 +10,6 @@ public abstract class Entity : MonoBehaviour
 {
     // Start is called before the first frame update
     public string enitityName; //the entities name
-    public string tagName; //the entities tag name
     #region Entity Stats
     public float maxHealth; //maximum health threshold
     public float currentHealth; //entities current health
