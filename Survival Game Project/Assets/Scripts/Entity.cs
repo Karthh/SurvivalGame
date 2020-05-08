@@ -10,6 +10,7 @@ public abstract class Entity : MonoBehaviour
 {
     // Start is called before the first frame update
     public string enitityName; //the entities name
+    public string tagName; //the entities tag name
     #region Entity Stats
     public float maxHealth; //maximum health threshold
     public float currentHealth; //entities current health
@@ -25,6 +26,7 @@ public abstract class Entity : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     #endregion
     public Dictionary<AnimationStates, string> animationStates;
+    public Queue<float> damageQueue;
     public virtual void Start()
     {
         InitializeStats();
@@ -37,10 +39,10 @@ public abstract class Entity : MonoBehaviour
     }
     public virtual void InitializeStats()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        InitializeAnimationStates();
-        currentHealth = maxHealth;
+        spriteRenderer = GetComponent<SpriteRenderer>(); //sprite renderer
+        animator = GetComponent<Animator>(); //animator
+        InitializeAnimationStates(); //animation states dictionary
+        currentHealth = maxHealth; //health
     }
     
     public virtual void InitializeAnimationStates()
@@ -49,8 +51,25 @@ public abstract class Entity : MonoBehaviour
         animationStates.Add(AnimationStates.IS_MOVING, "isMoving");
         animationStates.Add(AnimationStates.IS_ATTACKING, "isAttacking");
     }
+    public virtual void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.tag == "Hitbox")
+        {
+            float damageFromHit = col.GetComponent<AttackHitBox>().baseDamage;
+            TakeDamage(damageFromHit);
+        }
+    }
+    public virtual void TakeDamage(float damageRecieved)
+    {
+        currentHealth -= CalculateDamageTaken(damageRecieved);
+    }
+    private float CalculateDamageTaken(float damageRecieved)
+    {
+        return damageRecieved;
+    }
     public abstract void Movement(GameObject target);
     public abstract IEnumerator Attack(GameObject target, AnimationStates previousStates);
+
 
     /*
     void InitializeStats(float health, float strength, float magic, float physicalDefense, float magicalDefense, float moveSpeed, float resource)

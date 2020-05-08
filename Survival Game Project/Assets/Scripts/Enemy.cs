@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct AttackHitBox
+public struct AttackHitBoxObject
 {
     public Transform transform;
     public Vector3 position;
@@ -24,7 +24,7 @@ public class Enemy : Entity
     public float attackCoolDown; //duration of the enemy's attack cooldown
     public bool attackCD;
 
-    public AttackHitBox attackHitBox;
+    public AttackHitBoxObject attackHitBox;
     // Start is called before the first frame update
     public override void Start()
     {
