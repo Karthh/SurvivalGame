@@ -10,6 +10,9 @@ public class Player : Entity
     public bool attackCD;
 
     public AttackHitBoxObject attackHitBox;
+
+    //public int currentAnimationLayer;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -38,11 +41,13 @@ public class Player : Entity
 
                 transform.Translate(0.0f, moveSpeed * Time.deltaTime, 0.0f);
                 animator.SetBool(animationStates[0], true); //set the animation, can also write animator.SetBool(animationStates[AnimationState.IS_MOVING], true)
+                ChangeAnimationLayer(1);
             }
             if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(0.0f, -moveSpeed * Time.deltaTime, 0.0f);
                 animator.SetBool(animationStates[0], true); //set the animation, can also write animator.SetBool(animationStates[AnimationState.IS_MOVING], true)
+                ChangeAnimationLayer(2);
             }
             if (Input.GetKey(KeyCode.A))
             {
@@ -50,6 +55,7 @@ public class Player : Entity
                 animator.SetBool(animationStates[0], true); //set the animation, can also write animator.SetBool(animationStates[AnimationState.IS_MOVING], true)
                 spriteRenderer.flipX = true; //flip the sprite renderer
                 attackHitBox.transform.localPosition = new Vector2(-attackHitBox.position.x, attackHitBox.position.y); //flip the attack hitbox
+                ChangeAnimationLayer(0);
             }
             if (Input.GetKey(KeyCode.D))
             {
@@ -57,6 +63,7 @@ public class Player : Entity
                 animator.SetBool(animationStates[0], true); //set the animation, can also write animator.SetBool(animationStates[AnimationState.IS_MOVING], true)
                 spriteRenderer.flipX = false;
                 attackHitBox.transform.localPosition = new Vector2(attackHitBox.position.x, attackHitBox.position.y); //set right hitbox position
+                ChangeAnimationLayer(0);
             }
         }
         else
@@ -76,8 +83,26 @@ public class Player : Entity
             animator.SetBool(animationStates[0], false); //set animation to idle
             yield return new WaitForSeconds(basicAttackCoolDown); //wait until next attack
             attackCD = false; //a new attack can occur
-
-            float rng = Random.Range(0.0f, 1.0f);
+        }
+    }
+    /// <summary>
+    /// Changes the target animation layer to the target index
+    /// </summary>
+    /// <param name="target">The target animation layer index</param>
+    /// <param name="maxSize">The amount of layers in the animator</param>
+    public void ChangeAnimationLayer(int target)
+    {
+        int size = animator.layerCount;
+        for(int i = 0; i < size; i++)
+        {
+            if(i != target)
+            {
+                animator.SetLayerWeight(i, 0.0f);
+            }
+            else
+            {
+                animator.SetLayerWeight(i, 1.0f);
+            }
         }
     }
 }
