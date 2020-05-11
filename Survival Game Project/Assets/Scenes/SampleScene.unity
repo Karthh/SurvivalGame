@@ -283,6 +283,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1773981661, guid: 2b0eebb7cf171134abdce196a891b39a, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
       propertyPath: target
@@ -297,6 +301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attackDuration
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 782913502661283986, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
@@ -358,6 +367,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283987, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1137499855937497058, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
       propertyPath: m_Enabled
@@ -400,38 +414,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1102083930 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 782913502661283987, guid: 2b0eebb7cf171134abdce196a891b39a,
-    type: 3}
-  m_PrefabInstance: {fileID: 761669887}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1102083931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102083930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e518e22a0c7d6ae47a4269623e5870ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enitityName: 
-  maxHealth: 0
-  currentHealth: 0
-  strength: 0
-  magic: 0
-  physicalDefense: 0
-  magicalDefence: 0
-  moveSpeed: 0
-  resource: 0
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  basicAttackDuration: 0
-  basicAttackCoolDown: 0
-  attackCD: 0
 --- !u!1001 &1478287183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,6 +445,26 @@ PrefabInstance:
         type: 3}
       propertyPath: attackCoolDown
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283984, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283985, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8490566
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283985, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.7981561
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283985, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.40450338
       objectReference: {fileID: 0}
     - target: {fileID: 782913502661283986, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
@@ -519,10 +521,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283986, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 782913502661283987, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
       propertyPath: m_Name
       value: Rob_Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 782913502661283987, guid: 2b0eebb7cf171134abdce196a891b39a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1137499855937497058, guid: 2b0eebb7cf171134abdce196a891b39a,
         type: 3}
@@ -558,6 +570,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2407631308719773771, guid: 3310e7f21dc509c4d9cec8425a9e6af1,
+        type: 3}
+      propertyPath: hitWeight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2407631308719773771, guid: 3310e7f21dc509c4d9cec8425a9e6af1,
+        type: 3}
+      propertyPath: baseDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3601227988946754930, guid: 3310e7f21dc509c4d9cec8425a9e6af1,
+        type: 3}
+      propertyPath: currentHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3601227988946754931, guid: 3310e7f21dc509c4d9cec8425a9e6af1,
         type: 3}
       propertyPath: m_Name
