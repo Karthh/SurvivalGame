@@ -57,6 +57,7 @@ public abstract class Entity : MonoBehaviour
             float damageFromHit = col.GetComponent<AttackHitBox>().baseDamage;
             TakeDamage(damageFromHit);
         }
+        OnDeath();
     }
     public virtual void TakeDamage(float damageRecieved)
     {
@@ -68,6 +69,13 @@ public abstract class Entity : MonoBehaviour
     }
     public abstract void Movement(GameObject target);
     public abstract IEnumerator Attack(GameObject target, AnimationStates previousStates);
+    public virtual void OnDeath()
+    {
+        if (currentHealth <= 0)
+        {
+            Destroy(this, 1.0f);
+        }
+    }
 
 
     /*

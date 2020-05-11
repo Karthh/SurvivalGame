@@ -25,6 +25,7 @@ public class Enemy : Entity
     public bool attackCD;
 
     public AttackHitBoxObject attackHitBox;
+    public List<GameObject> dropTable;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -42,6 +43,7 @@ public class Enemy : Entity
         if(distanceFromTarget <= activeRange) //check to see if the target is in active range
         {
             Movement(target);
+            OnDeath();
         }
         else
         {
@@ -100,5 +102,33 @@ public class Enemy : Entity
         animator.SetBool(animationStates[0], false); //set animation to idle
         yield return new WaitForSeconds(attackCoolDown); //wait until next attack
         attackCD = false; //a new attack can occur
+    }
+    public virtual void ConfigureDropTable()
+    {
+        //Item item = list.GetComponent<Item>();
+        float dropRange = Random.Range(0.0f, 1.0f);
+        if (dropRange < 0.5)
+        {
+            Instantiate(dropTable[0], transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(dropTable[1], transform.position, Quaternion.identity);
+        }
+
+    }
+    public override void OnDeath()
+    {
+        bool spawnDrop = false;
+        if (currentHealth < 0)
+        {
+        spawnDrop = true;
+        if (spawnDrop)
+            {
+                //ConfigureDropTable();
+                //Destroy(gameObject, 0.1f);
+                //spawnDrop = false;
+            }
+        }
     }
 }
