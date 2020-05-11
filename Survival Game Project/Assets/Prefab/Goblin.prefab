@@ -96,30 +96,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 782913502661283987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 838c6006d6ac91845b0871416db1f1b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 69bc2972ba54a2046b9604783cd3562f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enitityName: Rob
+  enitityName: 
   maxHealth: 100
   currentHealth: 0
-  strength: 5
+  strength: 0
   magic: 0
   physicalDefense: 0
   magicalDefence: 0
-  moveSpeed: 2
+  moveSpeed: 0
   resource: 0
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
   target: {fileID: 0}
-  attackRange: 3
+  attackRange: 1
   distanceFromTarget: 0
   activeRange: 100
-  attackDuration: 0
-  attackCoolDown: 0
+  attackDuration: 1
+  attackCoolDown: 1
   attackCD: 0
-  dropTable:
-  - {fileID: 2946489537131812279, guid: d23f8babb5e73fb489a76e7e67757acf, type: 3}
-  - {fileID: 3863840653998893022, guid: 7ef3a1db79e99ab4b9478aae2f9fe577, type: 3}
+  dropTable: []
 --- !u!95 &8538398946803436609
 Animator:
   serializedVersion: 3
@@ -152,7 +150,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.030762196, y: -0.3132149}
+  m_Offset: {x: 0.017325215, y: -0.3132149}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -163,7 +161,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8157706, y: 0.6535702}
+  m_Size: {x: 0.4551152, y: 0.6535702}
   m_EdgeRadius: 0
 --- !u!50 &1773981661
 Rigidbody2D:
@@ -257,6 +255,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Hitbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946489537131812279, guid: d23f8babb5e73fb489a76e7e67757acf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3038322457728379634, guid: d23f8babb5e73fb489a76e7e67757acf,
         type: 3}

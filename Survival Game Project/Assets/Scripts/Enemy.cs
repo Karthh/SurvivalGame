@@ -14,7 +14,7 @@ public struct Attack
     public float cooldownDuration;
     public bool isCD;
 }
-public class Enemy : Entity
+public abstract class Enemy : Entity
 {
     public GameObject target; //the target GameObject
     public float attackRange; //the range in which this unit can attack
@@ -23,6 +23,8 @@ public class Enemy : Entity
     public float attackDuration; //duration of enemy's attack
     public float attackCoolDown; //duration of the enemy's attack cooldown
     public bool attackCD;
+
+    private bool isFlipped;
 
     public AttackHitBoxObject attackHitBox;
     public List<GameObject> dropTable;
@@ -36,21 +38,20 @@ public class Enemy : Entity
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        
+
         distanceFromTarget = Vector2.Distance(transform.position, target.transform.position); //calculate distance from target
-        if(distanceFromTarget <= activeRange) //check to see if the target is in active range
+        if (distanceFromTarget <= activeRange) //check to see if the target is in active range
         {
             Movement(target);
-            OnDeath();
         }
         else
         {
             //to do outside range
             //turn character 'off' code here
         }
-        
+
     }
     public override void Movement(GameObject target)
     {
@@ -68,8 +69,7 @@ public class Enemy : Entity
         {
             animator.SetBool(animationStates[0], false); //set the animation, can also write animator.SetBool(animationStates[AnimationState.IS_MOVING], false)
         }
-        //change sprite direction
-        bool isFlipped = false;
+        isFlipped = false; //change sprite direction
         if (transform.position.x < target.transform.position.x)
         {
             isFlipped = true;
@@ -117,18 +117,19 @@ public class Enemy : Entity
         }
 
     }
-    public override void OnDeath()
+    public override bool CheckForDeath()
     {
         bool spawnDrop = false;
-        if (currentHealth < 0)
+        if (base.CheckForDeath())
         {
-        spawnDrop = true;
-        if (spawnDrop)
+            spawnDrop = true;
+            if (spawnDrop)
             {
                 //ConfigureDropTable();
-                //Destroy(gameObject, 0.1f);
                 //spawnDrop = false;
             }
+            return true;
         }
+        return false;
     }
 }

@@ -4,7 +4,10 @@ using UnityEngine;
 public enum AnimationStates
 {
     IS_MOVING = 0,
-    IS_ATTACKING = 1
+    IS_ATTACKING = 1,
+    IS_HURTING = 2,
+    IS_DEAD = 3,
+    IS_ROLLING = 4
 }
 public abstract class Entity : MonoBehaviour
 {
@@ -23,6 +26,7 @@ public abstract class Entity : MonoBehaviour
     #region GameObject Components
     public Animator animator;
     public SpriteRenderer spriteRenderer;
+    public Rigidbody2D rigidbody;
     #endregion
     public Dictionary<AnimationStates, string> animationStates;
     public Queue<float> damageQueue;
@@ -38,10 +42,13 @@ public abstract class Entity : MonoBehaviour
     }
     public virtual void InitializeStats()
     {
+        currentHealth = maxHealth; //health
         spriteRenderer = GetComponent<SpriteRenderer>(); //sprite renderer
         animator = GetComponent<Animator>(); //animator
+        rigidbody = GetComponent<Rigidbody2D>(); //rigidbody
         InitializeAnimationStates(); //animation states dictionary
-        currentHealth = maxHealth; //health
+        animator.SetBool(animationStates[AnimationStates.IS_DEAD], false);
+       
     }
     
     public virtual void InitializeAnimationStates()
@@ -49,15 +56,30 @@ public abstract class Entity : MonoBehaviour
         animationStates = new Dictionary<AnimationStates, string>();
         animationStates.Add(AnimationStates.IS_MOVING, "isMoving");
         animationStates.Add(AnimationStates.IS_ATTACKING, "isAttacking");
+        animationStates.Add(AnimationStates.IS_HURTING, "isHurting");
+        animationStates.Add(AnimationStates.IS_DEAD, "isDead");
     }
     public virtual void OnTriggerEnter2D(Collider2D col)
     {
         if(col.tag == "Hitbox")
         {
-            float damageFromHit = col.GetComponent<AttackHitBox>().baseDamage;
-            TakeDamage(damageFromHit);
+            AttackHitBox hb = col.GetComponent<AttackHitBox>();
+            if(hb.considersEnemy == gameObject.transform.tag) //hitbox is from an enemy
+            {
+                float damageFromHit = hb.baseDamage;
+                TakeDamage(damageFromHit);
+                animator.SetBool(animationStates[AnimationStates.IS_HURTING], true); //hurt animation trigger
+                /*if (spriteRenderer.flipX)
+                {
+                    rigidbody.AddForce(Vector2.left * hb.hitWeight, ForceMode2D.Force); //add a small knockback force to the left
+                }
+                else
+                {
+                    rigidbody.AddForce(Vector2.right * hb.hitWeight, ForceMode2D.Force); //add a small knockback force to the right
+                }*/
+                
+            }
         }
-        OnDeath();
     }
     public virtual void TakeDamage(float damageRecieved)
     {
@@ -69,15 +91,18 @@ public abstract class Entity : MonoBehaviour
     }
     public abstract void Movement(GameObject target);
     public abstract IEnumerator Attack(GameObject target, AnimationStates previousStates);
+    /// <summary>
+    /// Checks if the entity's current health is less than or equal to 0
+    /// </summary>
+    /// <returns>Returns true if current health is less than or equal to 0. Returns false if not</returns>
+    public virtual bool CheckForDeath()
+    {
+        return (currentHealth < 0);
+    }
     public virtual void OnDeath()
     {
-        if (currentHealth <= 0)
-        {
-            Destroy(this, 1.0f);
-        }
+        rigidbody.velocity = Vector2.zero;
     }
-
-
     /*
     void InitializeStats(float health, float strength, float magic, float physicalDefense, float magicalDefense, float moveSpeed, float resource)
     {
