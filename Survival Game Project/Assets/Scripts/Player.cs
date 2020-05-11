@@ -76,7 +76,8 @@ public class Player : Entity
             animator.SetBool(animationStates[0], false); //set animation to idle
             yield return new WaitForSeconds(basicAttackCoolDown); //wait until next attack
             attackCD = false; //a new attack can occur
+
+            float rng = Random.Range(0.0f, 1.0f);
         }
-        
     }
 }
