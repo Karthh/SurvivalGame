@@ -97,7 +97,7 @@ public abstract class Entity : MonoBehaviour
     /// <returns>Returns true if current health is less than or equal to 0. Returns false if not</returns>
     public virtual bool CheckForDeath()
     {
-        return (currentHealth < 0);
+        return (currentHealth <= 0);
     }
     public virtual void OnDeath()
     {

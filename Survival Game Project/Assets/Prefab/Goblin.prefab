@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 26714aad23928c6409f7d5db6802b2ed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   resource: 0
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  rigidbody: {fileID: 0}
   target: {fileID: 0}
   attackRange: 1
   distanceFromTarget: 0
@@ -118,6 +119,7 @@ MonoBehaviour:
   attackCoolDown: 1
   attackCD: 0
   dropTable: []
+  dashRange: 0
 --- !u!95 &8538398946803436609
 Animator:
   serializedVersion: 3

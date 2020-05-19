@@ -65,12 +65,14 @@ public class Player : Entity
 
                 transform.Translate(0.0f, moveSpeed * Time.deltaTime, 0.0f); //move player up
                 animator.SetBool(animationStates[AnimationStates.IS_MOVING], true); //set the animation
+                rigidbody.velocity = Vector2.zero;
                 ChangeAnimationLayer(1); //change the active animation layer
             }
             if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(0.0f, -moveSpeed * Time.deltaTime, 0.0f); //move player down
                 animator.SetBool(animationStates[AnimationStates.IS_MOVING], true); //set the animation
+                rigidbody.velocity = Vector2.zero;
                 ChangeAnimationLayer(2); //change the active animation layer
             }
             if (Input.GetKey(KeyCode.A))
@@ -79,6 +81,7 @@ public class Player : Entity
                 animator.SetBool(animationStates[AnimationStates.IS_MOVING], true); //set the animation
                 spriteRenderer.flipX = true; //flip the sprite renderer
                 attackHitBox.transform.localPosition = new Vector2(-attackHitBox.position.x, attackHitBox.position.y); //flip the attack hitbox
+                rigidbody.velocity = Vector2.zero;
                 ChangeAnimationLayer(0); //change the active animation layer
             }
             if (Input.GetKey(KeyCode.D))
@@ -87,6 +90,7 @@ public class Player : Entity
                 animator.SetBool(animationStates[AnimationStates.IS_MOVING], true); //set the animation
                 spriteRenderer.flipX = false; //unflip the sprite renderer
                 attackHitBox.transform.localPosition = new Vector2(attackHitBox.position.x, attackHitBox.position.y); //set right hitbox position
+                rigidbody.velocity = Vector2.zero;
                 ChangeAnimationLayer(0); //change the active animation layer
             }
             if (Input.GetKey(KeyCode.Space))
@@ -112,7 +116,7 @@ public class Player : Entity
     /// <returns></returns>
     public override IEnumerator Attack(GameObject target, AnimationStates previousState)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !animator.GetBool(animationStates[AnimationStates.IS_MOVING]))
         {
             attackCD = true; //set cooldown to true
             animator.SetBool(animationStates[previousState], false); //set previous animation state

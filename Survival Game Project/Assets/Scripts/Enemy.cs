@@ -51,6 +51,7 @@ public abstract class Enemy : Entity
             //to do outside range
             //turn character 'off' code here
         }
+        Debug.DrawLine(transform.position, target.transform.position, Color.red);
 
     }
     public override void Movement(GameObject target)
@@ -86,6 +87,7 @@ public abstract class Enemy : Entity
             spriteRenderer.flipX = false;
             attackHitBox.transform.localPosition = new Vector2(attackHitBox.position.x, attackHitBox.position.y); //set right hitbox position
         }
+       
         
     }
     public override void OnTriggerEnter2D(Collider2D col)
