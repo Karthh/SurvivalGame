@@ -24,7 +24,6 @@ public class Goblin_Small : Enemy
             animator.SetBool(animationStates[AnimationStates.IS_DEAD], true);
             OnDeath();
         }
-        
     }
     public override IEnumerator Attack(GameObject target, AnimationStates previousState)
     {
@@ -32,10 +31,9 @@ public class Goblin_Small : Enemy
        // moveSpeed = 0; //stop moving
         attackCD = true; //set cooldown to true
         animator.SetBool(animationStates[previousState], false); //set previous animation state
-                                                                 // transform.position = Vector2.Lerp(transform.position, target.transform.position, tempMS / 2.0f); //dash to target
-        Vector2 uTargetDirection = new Vector2(target.transform.position.x - transform.position.x, target.transform.position.y - transform.position.y).normalized;
+        Vector2 uTargetDirection = new Vector2(target.transform.position.x - transform.position.x, target.transform.position.y - transform.position.y).normalized; //create a unit vector in the direction of the target
         Debug.DrawLine(transform.position, uTargetDirection);
-        rigidbody.AddForce(uTargetDirection * dashRange, ForceMode2D.Force);
+        rigidbody.AddForce(uTargetDirection * dashRange, ForceMode2D.Force); //dash towards target
         attackHitBox.collider.enabled = true; //enable the collider
         yield return new WaitForSeconds(attackDuration); //duration of the attack
         rigidbody.velocity = Vector2.zero;

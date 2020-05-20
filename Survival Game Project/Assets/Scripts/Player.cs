@@ -140,11 +140,11 @@ public class Player : Entity
         {
             if(i != target)
             {
-                animator.SetLayerWeight(i, 0.0f);
+                animator.SetLayerWeight(i, 0.0f); //turn off animation layer
             }
             else
             {
-                animator.SetLayerWeight(i, 1.0f);
+                animator.SetLayerWeight(i, 1.0f); //turn on animation layer
             }
         }
     }

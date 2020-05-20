@@ -119,22 +119,5 @@ public abstract class Enemy : Entity
             return dropTable[1];
         }
     }
-    public override bool CheckForDeath()
-    {
-        bool spawnDrop = false;
-        if (base.CheckForDeath() == true)
-        {
-            spawnDrop = true;
-            if (spawnDrop == true)
-            {
-                for (int i = 0; i < itemCount; itemCount++){
-                    Instantiate(ConfigureDropTable(), transform.position, Quaternion.identity);
-                }
-                
-            }
-            return true;
-            spawnDrop = false; //comment out if left unfinished
-        }
-        return false;
-    }
+    
 }
