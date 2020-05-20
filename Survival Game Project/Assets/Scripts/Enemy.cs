@@ -23,6 +23,7 @@ public abstract class Enemy : Entity
     public float attackDuration; //duration of enemy's attack
     public float attackCoolDown; //duration of the enemy's attack cooldown
     public bool attackCD;
+    public int itemCount;
 
     private bool isFlipped;
 
@@ -105,32 +106,34 @@ public abstract class Enemy : Entity
         yield return new WaitForSeconds(attackCoolDown); //wait until next attack
         attackCD = false; //a new attack can occur
     }
-    public virtual void ConfigureDropTable()
+    public virtual GameObject ConfigureDropTable()
     {
         //Item item = list.GetComponent<Item>();
         float dropRange = Random.Range(0.0f, 1.0f);
         if (dropRange < 0.5)
         {
-            Instantiate(dropTable[0], transform.position, Quaternion.identity);
+            return dropTable[0];
         }
         else
         {
-            Instantiate(dropTable[1], transform.position, Quaternion.identity);
+            return dropTable[1];
         }
-
     }
     public override bool CheckForDeath()
     {
         bool spawnDrop = false;
-        if (base.CheckForDeath())
+        if (base.CheckForDeath() == true)
         {
             spawnDrop = true;
-            if (spawnDrop)
+            if (spawnDrop == true)
             {
-                //ConfigureDropTable();
-                //spawnDrop = false;
+                for (int i = 0; i < itemCount; itemCount++){
+                    Instantiate(ConfigureDropTable(), transform.position, Quaternion.identity);
+                }
+                
             }
             return true;
+            spawnDrop = false; //comment out if left unfinished
         }
         return false;
     }
