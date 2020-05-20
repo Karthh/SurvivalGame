@@ -28,8 +28,14 @@ public abstract class Entity : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rigidbody;
     #endregion
+    public bool isDead = false;
     public Dictionary<AnimationStates, string> animationStates;
     public Queue<float> damageQueue;
+
+    #region VFX
+    float dissolveTimer = 1.0f;
+    bool isDying = false;
+    #endregion
     public virtual void Start()
     {
         InitializeStats();
@@ -48,6 +54,7 @@ public abstract class Entity : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>(); //rigidbody
         InitializeAnimationStates(); //animation states dictionary
         animator.SetBool(animationStates[AnimationStates.IS_DEAD], false);
+        isDead = false;
        
     }
     
@@ -102,7 +109,58 @@ public abstract class Entity : MonoBehaviour
     public virtual void OnDeath()
     {
         rigidbody.velocity = Vector2.zero;
+        if (!isDead)
+        {
+            StartCoroutine(DissolveOnDeath(7.5f, 3.0f, Color.gray)); //dissolve entity on death
+        }
+        
     }
+    #region VFX
+    /// <summary>
+    /// Dissolves Enitity on Death
+    /// </summary>
+    /// <param name="lerpTime">time to lerp</param>
+    /// <param name="waitTime">time before dissolve effect</param>
+    /// <param name="fadeColor">the color to fade to</param>
+    /// <returns></returns>
+    private IEnumerator DissolveOnDeath(float lerpTime, float waitTime, Color fadeColor)
+    {
+        isDying = true;
+        yield return new WaitForSeconds(waitTime);
+        if (isDying)
+        {
+            dissolveTimer -= Time.deltaTime; //decrement the timer
+            if(dissolveTimer <= 0) //done dissolving
+            {
+                dissolveTimer = 0;
+                isDying = false;
+            }
+            spriteRenderer.color = Color.Lerp(spriteRenderer.color, fadeColor, lerpTime * Time.deltaTime); //lerp the color of the entity to the fade color
+            Dissolve(); //use the dissolve shader
+            yield return new WaitForSeconds(1f);
+        }
+        isDead = true;
+        Destroy(gameObject, 0.1f); //destroy the game object
+
+    }
+    /// <summary>
+    /// Dissolve Shader Code
+    /// </summary>
+    private void Dissolve()
+    {
+        Material dissolve = spriteRenderer.material;
+        if (isDying)
+        {
+            dissolveTimer -= Time.deltaTime;
+            if(dissolveTimer <= 0)
+            {
+                dissolveTimer = 0;
+                isDying = false;
+            }
+            dissolve.SetFloat("_Fade", dissolveTimer);
+        }
+    }
+    #endregion
     /*
     void InitializeStats(float health, float strength, float magic, float physicalDefense, float magicalDefense, float moveSpeed, float resource)
     {

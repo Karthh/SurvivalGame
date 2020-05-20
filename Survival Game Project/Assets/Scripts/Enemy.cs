@@ -129,6 +129,7 @@ public abstract class Enemy : Entity
             {
                 //ConfigureDropTable();
                 //spawnDrop = false;
+               
             }
             return true;
         }
