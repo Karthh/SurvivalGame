@@ -13,6 +13,7 @@ public abstract class Entity : MonoBehaviour
 {
     // Start is called before the first frame update
     public string enitityName; //the entities name
+    public GameManager gameManager;
     #region Entity Stats
     public float maxHealth; //maximum health threshold
     public float currentHealth; //entities current health
@@ -34,7 +35,7 @@ public abstract class Entity : MonoBehaviour
 
     #region VFX
     float dissolveTimer = 1.0f;
-    bool isDying = false;
+    public bool isDying = false;
     #endregion
     public virtual void Start()
     {
@@ -48,6 +49,7 @@ public abstract class Entity : MonoBehaviour
     }
     public virtual void InitializeStats()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         currentHealth = maxHealth; //health
         spriteRenderer = GetComponent<SpriteRenderer>(); //sprite renderer
         animator = GetComponent<Animator>(); //animator
@@ -78,11 +80,11 @@ public abstract class Entity : MonoBehaviour
                 animator.SetBool(animationStates[AnimationStates.IS_HURTING], true); //hurt animation trigger
                 /*if (spriteRenderer.flipX)
                 {
-                    rigidbody.AddForce(Vector2.left * hb.hitWeight, ForceMode2D.Force); //add a small knockback force to the left
+                    StartCoroutine(AddForceOnHit(hb.hitWeight, 0.25f, Vector2.left)); //add a small knockback force to the left
                 }
                 else
                 {
-                    rigidbody.AddForce(Vector2.right * hb.hitWeight, ForceMode2D.Force); //add a small knockback force to the right
+                    StartCoroutine(AddForceOnHit(hb.hitWeight, 0.25f, Vector2.right)); //add a small knockback force to the right
                 }*/
                 
             }
@@ -115,6 +117,19 @@ public abstract class Entity : MonoBehaviour
         }
         
     }
+    /// <summary>
+    /// Applies a knockback force
+    /// </summary>
+    /// <param name="hitWeight"></param>
+    /// <param name="t"></param>
+    /// <param name="direction"></param>
+    /// <returns></returns>
+    private IEnumerator AddForceOnHit(float hitWeight, float t, Vector3 direction)
+    {
+        rigidbody.AddForce(direction * hitWeight, ForceMode2D.Force);
+        yield return new WaitForSeconds(t);
+        rigidbody.velocity = Vector2.zero;
+    }
     #region VFX
     /// <summary>
     /// Dissolves Enitity on Death
@@ -129,13 +144,14 @@ public abstract class Entity : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         if (isDying)
         {
-            dissolveTimer -= Time.deltaTime; //decrement the timer
+            dissolveTimer -= Time.deltaTime / 2; //decrement the timer
             if(dissolveTimer <= 0) //done dissolving
             {
                 dissolveTimer = 0;
                 isDying = false;
             }
             spriteRenderer.color = Color.Lerp(spriteRenderer.color, fadeColor, lerpTime * Time.deltaTime); //lerp the color of the entity to the fade color
+            yield return new WaitForSeconds(0.5f);
             Dissolve(); //use the dissolve shader
             yield return new WaitForSeconds(1f);
         }
