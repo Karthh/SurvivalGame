@@ -119,5 +119,20 @@ public abstract class Enemy : Entity
             return dropTable[1];
         }
     }
-    
+    public IEnumerator SpawnItems(float t)
+    {
+        for (int i = 0; i < itemCount; itemCount++)
+        {
+            Instantiate(ConfigureDropTable(), transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(t);
+        }
+    }
+    public override void OnDeath()
+    {
+        if (isDying)
+        {
+            StartCoroutine(SpawnItems(0.2f));
+        }
+        base.OnDeath();
+    }
 }
