@@ -8,6 +8,7 @@ public class AttackHitBox : MonoBehaviour
     public float baseDamage; //damage this hitbox should deal
     public string considersEnemy; //what the entity considers an enemy
     public float hitWeight;//how heavy the hit should beS
+    public GameObject projectile; //projectile to spawn (if any)
     void Start()
     {
         switch (gameObject.transform.root.tag)
@@ -25,6 +26,16 @@ public class AttackHitBox : MonoBehaviour
     void Update()
     {
 
+    }
+    public void SpawnProjectile(Vector3 direction)
+    {
+        if(this.projectile != null)
+        {
+            GameObject projectile = Instantiate(this.projectile, transform.position, Quaternion.identity);
+            projectile.GetComponent<Projectile>().direction = direction;
+
+        }
+        
     }
 
 }
