@@ -33,8 +33,9 @@ public class Limbo_Small_Ranged : Enemy
         animator.SetBool(animationStates[previousState], false); //set previous animation state
         Vector2 uTargetDirection = new Vector2(target.transform.position.x - transform.position.x, target.transform.position.y - transform.position.y).normalized; //create a unit vector in the direction of the target
         Debug.DrawLine(transform.position, uTargetDirection);
-        attackHitBox.transform.GetComponent<AttackHitBox>().SpawnProjectile(uTargetDirection);
+        
         yield return new WaitForSeconds(attackDuration); //duration of the attack
+        attackHitBox.transform.GetComponent<AttackHitBox>().SpawnProjectile(uTargetDirection);
         animator.SetBool(animationStates[0], false); //set animation to idle
         yield return new WaitForSeconds(attackCoolDown); //wait until next attack
         attackCD = false; //a new attack can occur
