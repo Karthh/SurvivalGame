@@ -121,10 +121,13 @@ public abstract class Enemy : Entity
     }
     public IEnumerator SpawnItems(float t)
     {
-        for (int i = 0; i < itemCount; itemCount++)
+        int i = 0;
+        itemCount = 1;
+        while (i < itemCount)
         {
             Instantiate(ConfigureDropTable(), transform.position, Quaternion.identity);
             yield return new WaitForSeconds(t);
+            i++;
         }
     }
     public override void OnDeath()

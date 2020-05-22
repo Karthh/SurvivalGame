@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enitityName: 
+  gameManager: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
   strength: 0
@@ -111,6 +112,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
   rigidbody: {fileID: 0}
+  isDead: 0
+  isDying: 0
   target: {fileID: 0}
   attackRange: 1
   distanceFromTarget: 0
@@ -120,8 +123,8 @@ MonoBehaviour:
   attackCD: 0
   itemCount: 1
   dropTable:
-  - {fileID: 7737902011199454656, guid: 4d5d56762fd8e424ca8a23bf526c00db, type: 3}
   - {fileID: 6448940076577503252, guid: 073df819534b25240960e57792928bff, type: 3}
+  - {fileID: 7737902011199454656, guid: 4d5d56762fd8e424ca8a23bf526c00db, type: 3}
   dashRange: 0
 --- !u!95 &8538398946803436609
 Animator:

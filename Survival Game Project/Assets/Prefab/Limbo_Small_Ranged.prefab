@@ -165,6 +165,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0e51913b7134a4caac422537ce49b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enitityName: 
+  gameManager: {fileID: 0}
+  maxHealth: 0
+  currentHealth: 0
+  strength: 0
+  magic: 0
+  physicalDefense: 0
+  magicalDefence: 0
+  moveSpeed: 0
+  resource: 0
+  animator: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  rigidbody: {fileID: 0}
+  isDead: 0
+  isDying: 0
+  target: {fileID: 0}
+  attackRange: 0
+  distanceFromTarget: 0
+  activeRange: 0
+  attackDuration: 0
+  attackCoolDown: 0
+  attackCD: 0
+  itemCount: 0
+  dropTable:
+  - {fileID: 7737902011199454656, guid: 4d5d56762fd8e424ca8a23bf526c00db, type: 3}
+  - {fileID: 6448940076577503252, guid: 073df819534b25240960e57792928bff, type: 3}
+  dashRange: 0
 --- !u!1001 &2864497113606230083
 PrefabInstance:
   m_ObjectHideFlags: 0

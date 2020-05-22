@@ -122,7 +122,9 @@ MonoBehaviour:
   attackCoolDown: 2
   attackCD: 0
   itemCount: 0
-  dropTable: []
+  dropTable:
+  - {fileID: 7737902011199454656, guid: 4d5d56762fd8e424ca8a23bf526c00db, type: 3}
+  - {fileID: 6448940076577503252, guid: 073df819534b25240960e57792928bff, type: 3}
   dashRange: 200
 --- !u!95 &6260997512281676018
 Animator:
