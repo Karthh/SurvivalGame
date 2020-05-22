@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2864497113362407501}
   - component: {fileID: 2864497113362407500}
   - component: {fileID: 8152417896214613819}
+  - component: {fileID: 1607557560838890393}
   m_Layer: 8
   m_Name: Limbo_Small_Ranged
   m_TagString: Enemy
@@ -180,6 +181,7 @@ MonoBehaviour:
   rigidbody: {fileID: 0}
   isDead: 0
   isDying: 0
+  shaderManager: {fileID: 0}
   target: {fileID: 0}
   attackRange: 0
   distanceFromTarget: 0
@@ -192,6 +194,24 @@ MonoBehaviour:
   - {fileID: 7737902011199454656, guid: 4d5d56762fd8e424ca8a23bf526c00db, type: 3}
   - {fileID: 6448940076577503252, guid: 073df819534b25240960e57792928bff, type: 3}
   dashRange: 0
+--- !u!114 &1607557560838890393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2864497113362407499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943e95704db9ba34587a98412d31ca98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  materialList:
+  - {fileID: 2100000, guid: 68d8acc9a5a390f41899b8e1060a8b12, type: 2}
+  - {fileID: 2100000, guid: 3563440fef7f92445925cbaff5553d15, type: 2}
+  animationMap: {fileID: 0}
+  emissionMap: {fileID: 0}
 --- !u!1001 &2864497113606230083
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8538398946803436609}
   - component: {fileID: 893319809670992132}
   - component: {fileID: 1773981661}
+  - component: {fileID: 5300894957804108179}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Enemy
@@ -114,6 +115,7 @@ MonoBehaviour:
   rigidbody: {fileID: 0}
   isDead: 0
   isDying: 0
+  shaderManager: {fileID: 0}
   target: {fileID: 0}
   attackRange: 1
   distanceFromTarget: 0
@@ -192,6 +194,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5300894957804108179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782913502661283987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943e95704db9ba34587a98412d31ca98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  materialList:
+  - {fileID: 2100000, guid: 68d8acc9a5a390f41899b8e1060a8b12, type: 2}
+  - {fileID: 2100000, guid: 3563440fef7f92445925cbaff5553d15, type: 2}
+  animationMap: {fileID: 0}
+  emissionMap: {fileID: 0}
 --- !u!1001 &2730162391572253968
 PrefabInstance:
   m_ObjectHideFlags: 0
