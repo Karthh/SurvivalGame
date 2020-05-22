@@ -41,18 +41,21 @@ public abstract class Enemy : Entity
     // Update is called once per frame
     public virtual void Update()
     {
-
-        distanceFromTarget = Vector2.Distance(transform.position, target.transform.position); //calculate distance from target
-        if (distanceFromTarget <= activeRange) //check to see if the target is in active range
+        if(target != null)
         {
-            Movement(target);
+            distanceFromTarget = Vector2.Distance(transform.position, target.transform.position); //calculate distance from target
+            if (distanceFromTarget <= activeRange) //check to see if the target is in active range
+            {
+                Movement(target);
+            }
+            else
+            {
+                //to do outside range
+                //turn character 'off' code here
+            }
+            Debug.DrawLine(transform.position, target.transform.position, Color.red);
         }
-        else
-        {
-            //to do outside range
-            //turn character 'off' code here
-        }
-        Debug.DrawLine(transform.position, target.transform.position, Color.red);
+ 
 
     }
     public override void Movement(GameObject target)

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3601227988946754933}
   - component: {fileID: 3601227988946754930}
   - component: {fileID: 3601227988946754889}
+  - component: {fileID: 1400453017186900503}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 26714aad23928c6409f7d5db6802b2ed, type: 2}
+  - {fileID: 2100000, guid: 68d8acc9a5a390f41899b8e1060a8b12, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1769178655
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 90c2c3079c716284d8fc72ec70e7a42b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enitityName: 
+  gameManager: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
   strength: 0
@@ -158,6 +160,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
   rigidbody: {fileID: 0}
+  isDead: 0
+  isDying: 0
+  shaderManager: {fileID: 0}
   basicAttackDuration: 1
   basicAttackCoolDown: 1
   attackCD: 0
@@ -180,6 +185,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1400453017186900503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3601227988946754931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943e95704db9ba34587a98412d31ca98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  materialList:
+  - {fileID: 2100000, guid: 68d8acc9a5a390f41899b8e1060a8b12, type: 2}
+  - {fileID: 2100000, guid: 3563440fef7f92445925cbaff5553d15, type: 2}
+  animationMap: {fileID: 0}
+  emissionMap: {fileID: 0}
 --- !u!1001 &780399715761326381
 PrefabInstance:
   m_ObjectHideFlags: 0
