@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6260997512281676018}
   - component: {fileID: 6260997512281676016}
   - component: {fileID: 6260997512281676017}
+  - component: {fileID: 4656489622473948157}
   m_Layer: 8
   m_Name: Limbo_Small_Melee
   m_TagString: Enemy
@@ -114,6 +115,7 @@ MonoBehaviour:
   rigidbody: {fileID: 0}
   isDead: 0
   isDying: 0
+  shaderManager: {fileID: 0}
   target: {fileID: 0}
   attackRange: 20
   distanceFromTarget: 0
@@ -190,6 +192,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4656489622473948157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6260997512281676022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943e95704db9ba34587a98412d31ca98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 0}
+  materialList:
+  - {fileID: 2100000, guid: 68d8acc9a5a390f41899b8e1060a8b12, type: 2}
+  - {fileID: 2100000, guid: 3563440fef7f92445925cbaff5553d15, type: 2}
+  animationMap: {fileID: 2800000, guid: c5981d4df6eacb649b2597cc3aaabd59, type: 3}
+  emissionMap: {fileID: 2800000, guid: 020f8ead9b0e40240952464b3cbcfe74, type: 3}
 --- !u!1001 &6260997511987587326
 PrefabInstance:
   m_ObjectHideFlags: 0
