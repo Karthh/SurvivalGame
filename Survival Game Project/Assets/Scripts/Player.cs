@@ -10,6 +10,7 @@ public class Player : Entity
     public bool attackCD;
 
     public AttackHitBoxObject attackHitBox;
+    public bool interact;
 
     // Start is called before the first frame update
     public override void Start()
@@ -33,6 +34,7 @@ public class Player : Entity
                 StartCoroutine(Attack(null, AnimationStates.IS_MOVING)); //start attack
                 animator.SetTrigger(animationStates[AnimationStates.IS_ATTACKING]); //set attack animation
             }
+            PlayerInteract();
         }
         else //player is dead
         {
@@ -98,10 +100,37 @@ public class Player : Entity
                 animator.SetTrigger(animationStates[AnimationStates.IS_ROLLING]); //trigger roll animation
                 //add roll method call here
             }
+            
         }
         else
         {
             animator.SetBool(animationStates[AnimationStates.IS_MOVING], false); //set the animation to idle
+        }
+    }
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        
+        if (collision.tag == "NPC" && interact == true)
+        {
+            NPC npc = collision.GetComponent<NPC>();
+            Debug.Log(npc.npcMessage);
+            //if (npc.canInteract)
+            //{
+                
+                //npc.canInteract = false;
+            //}
+            interact = false;
+        }
+    }
+    public void PlayerInteract()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            interact = true;
+        }
+        else
+        {
+            interact = false;
         }
     }
     public override void OnTriggerEnter2D(Collider2D col)
