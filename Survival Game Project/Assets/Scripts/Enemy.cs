@@ -23,7 +23,9 @@ public abstract class Enemy : Entity
     public float attackDuration; //duration of enemy's attack
     public float attackCoolDown; //duration of the enemy's attack cooldown
     public bool attackCD;
+
     public int itemCount;
+    public bool ableToSpawnItems;
 
     private bool isFlipped;
 
@@ -36,6 +38,7 @@ public abstract class Enemy : Entity
         attackHitBox.transform = transform.GetChild(0);
         attackHitBox.position = attackHitBox.transform.localPosition;
         attackHitBox.collider = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        ableToSpawnItems = true;
     }
 
     // Update is called once per frame
@@ -122,23 +125,23 @@ public abstract class Enemy : Entity
             return dropTable[1];
         }
     }
-    public IEnumerator SpawnItems(float t)
+    public void SpawnItems()
     {
-        int i = 0;
-        itemCount = 1;
-        while (i < itemCount)
+        for(int i = 0; i < itemCount; i++)
         {
-            Instantiate(ConfigureDropTable(), transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(t);
-            i++;
+            if (ableToSpawnItems)
+            {
+                Instantiate(ConfigureDropTable(), transform.position, Quaternion.identity);
+            }
+            if(i + 1 == itemCount)
+            {
+                ableToSpawnItems = false;
+            }
         }
     }
     public override void OnDeath()
     {
-        if (isDying)
-        {
-            StartCoroutine(SpawnItems(0.2f));
-        }
+        SpawnItems();
         base.OnDeath();
     }
 }

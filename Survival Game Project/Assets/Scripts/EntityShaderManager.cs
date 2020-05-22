@@ -71,7 +71,7 @@ public class EntityShaderManager : MonoBehaviour
     /// </summary>
     private void Dissolve(SpriteRenderer renderer)
     {
-        renderer.material = materialList[(int)MaterialNodes.DISSOLVE];
+        //renderer.material = materialList[(int)MaterialNodes.DISSOLVE];
         if (entity.isDying)
         {
             dissolveTimer -= Time.deltaTime;
