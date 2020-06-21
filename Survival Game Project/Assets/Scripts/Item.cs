@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+
+public class Item: MonoBehaviour
 {
-    public int rarityLevel;
-    // Start is called before the first frame update
-    void Start()
+    public string itemName;
+    public int maxAmount;
+    public Sprite sprite;
+
+    public Item(Item item)
     {
-        
+        this.itemName = item.itemName;
+        this.maxAmount = item.maxAmount;
+        this.sprite = item.sprite;
+
+    }
+    private void Start()
+    {
+        sprite = GetComponent<SpriteRenderer>().sprite;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
+    public List<GameObject> activeItems;
+    
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");

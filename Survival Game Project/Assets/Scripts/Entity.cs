@@ -9,6 +9,15 @@ public enum AnimationStates
     IS_DEAD = 3,
     IS_ROLLING = 4
 }
+public struct State
+{
+    public State(bool isDamageable)
+    {
+        this.isDamageable = isDamageable;
+    }
+    public bool isDamageable;
+
+}
 public abstract class Entity : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -33,6 +42,7 @@ public abstract class Entity : MonoBehaviour
     public bool isDying = false;
     public Dictionary<AnimationStates, string> animationStates;
     public Queue<float> damageQueue;
+    public State objState;
 
     #region VFX
     public EntityShaderManager shaderManager;
@@ -59,6 +69,7 @@ public abstract class Entity : MonoBehaviour
         InitializeAnimationStates(); //animation states dictionary
         animator.SetBool(animationStates[AnimationStates.IS_DEAD], false);
         isDead = false;
+        objState = new State(true);
        
     }
     
@@ -72,7 +83,7 @@ public abstract class Entity : MonoBehaviour
     }
     public virtual void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Hitbox")
+        if(col.tag == "Hitbox" && objState.isDamageable)
         {
             AttackHitBox hb = col.GetComponent<AttackHitBox>();
             if(hb.considersEnemy == gameObject.transform.tag) //hitbox is from an enemy

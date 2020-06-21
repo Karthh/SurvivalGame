@@ -9,9 +9,14 @@ public class Player : Entity
     public float basicAttackCoolDown; //duration of the basic attack cooldown
     public bool attackCD;
 
+    public float rollRangeValue;
+    public float rollCDTimer;
+    public bool rollCD;
+
     public AttackHitBoxObject attackHitBox;
     public bool interact;
 
+    public Dictionary<string, int> inventory;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -19,6 +24,7 @@ public class Player : Entity
         attackHitBox.transform = transform.GetChild(0);//get the position of the collider from the child
         attackHitBox.position = attackHitBox.transform.localPosition; //get the position of collider from the child
         attackHitBox.collider = transform.GetChild(0).GetComponent<BoxCollider2D>(); //get the collider from the child
+        inventory = new Dictionary<string, int>();
         InitializeAnimationStates(); //set up animation states unique to player
     }
 
@@ -34,7 +40,7 @@ public class Player : Entity
                 StartCoroutine(Attack(null, AnimationStates.IS_MOVING)); //start attack
                 animator.SetTrigger(animationStates[AnimationStates.IS_ATTACKING]); //set attack animation
             }
-            PlayerInteract();
+
         }
         else //player is dead
         {
@@ -43,14 +49,14 @@ public class Player : Entity
             OnDeath(); //to do on death
             //Destroy(gameObject, 1.0f);
         }
-        
+
     }
     /// <summary>
     /// Initializes the animationStates Dictionary
     /// </summary>
     public override void InitializeAnimationStates()
     {
-        
+
         base.InitializeAnimationStates();
         animationStates.Add(AnimationStates.IS_ROLLING, "isRolling");
     }
@@ -95,12 +101,27 @@ public class Player : Entity
                 rigidbody.velocity = Vector2.zero;
                 ChangeAnimationLayer(0); //change the active animation layer
             }
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) && !rollCD)
             {
-                animator.SetTrigger(animationStates[AnimationStates.IS_ROLLING]); //trigger roll animation
+                
+                StartCoroutine(Roll());
                 //add roll method call here
             }
-            
+            if (Input.GetKey(KeyCode.E))
+            {
+                //PlayerInteract();
+                interact = true;
+            }
+            else
+            {
+                interact = false;
+            }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                PrintInventory();
+            }
+
+
         }
         else
         {
@@ -109,33 +130,95 @@ public class Player : Entity
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
-        
-        if (collision.tag == "NPC" && interact == true)
-        {
-            NPC npc = collision.GetComponent<NPC>();
-            Debug.Log(npc.npcMessage);
-            //if (npc.canInteract)
-            //{
-                
-                //npc.canInteract = false;
-            //}
-            interact = false;
-        }
+
+        /* if (collision.tag == "NPC" && interact == true)
+         {
+             NPC npc = collision.GetComponent<NPC>();
+             Debug.Log(npc.npcMessage);
+             //if (npc.canInteract)
+             //{
+
+                 //npc.canInteract = false;
+             //}
+             interact = false;
+         } */
     }
     public void PlayerInteract()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            interact = true;
+            //interact = true;
         }
         else
         {
-            interact = false;
+            // interact = false;
         }
+    }
+    public IEnumerator Roll()
+    {
+        animator.SetTrigger(animationStates[AnimationStates.IS_ROLLING]); //trigger roll animation
+        rigidbody.velocity = Vector2.zero;
+        objState.isDamageable = false;
+        Debug.Log(objState.isDamageable);
+        for (int i = 0; i < animator.layerCount; i++)
+        {
+            if (ReturnCurrentAnimationState(i))
+            {
+                switch (i)
+                {
+                    case 0:
+
+                        if (spriteRenderer.flipX)
+                        {
+                            rigidbody.AddForce(Vector2.left * rollRangeValue, ForceMode2D.Force); //left
+                        }
+                        else
+                        {
+                            rigidbody.AddForce(Vector2.right * rollRangeValue, ForceMode2D.Force); //right
+                        }
+                        break;
+                    case 1:
+                        rigidbody.AddForce(Vector2.up * rollRangeValue, ForceMode2D.Force); //up
+                        break;
+                    case 2:
+                        rigidbody.AddForce(Vector2.down * rollRangeValue, ForceMode2D.Force); //down
+                        break;
+                }
+            }
+        }
+
+        rollCD = true;
+        yield return new WaitForSeconds(rollCDTimer);
+        rigidbody.velocity = Vector2.zero;
+        rollCD = false;
+        objState.isDamageable = true;
+        Debug.Log(objState.isDamageable);
+
     }
     public override void OnTriggerEnter2D(Collider2D col)
     {
         base.OnTriggerEnter2D(col);
+        if (interact & col.TryGetComponent(out NPC npc) || col.tag == "NPC")
+        {
+            Debug.Log(npc.npcMessage);
+        }
+        if (col.tag == "Item" && col.TryGetComponent(out Item item))
+        {
+            if (!CheckInvForItem(item))
+            {
+                inventory.Add(item.itemName, 1); //add new item entry
+                Debug.Log("Added: " + item.itemName + " to inventory. Count: " + inventory[item.itemName]);
+                Destroy(col.gameObject);
+
+            }
+            else
+            {
+                inventory[item.itemName]++; //add +1 to item count
+                Debug.Log("Added: " + item.itemName + " to inventory. Count: " + inventory[item.itemName]);
+                Destroy(col.gameObject);
+            }
+            
+        }
     }
     /// <summary>
     /// Player Attack Method
@@ -176,5 +259,40 @@ public class Player : Entity
                 animator.SetLayerWeight(i, 1.0f); //turn on animation layer
             }
         }
+    }
+    public bool ReturnCurrentAnimationState(int layerIndex)
+    {
+        if(animator.GetLayerWeight(layerIndex) == 1.0f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+       
+        
+    }
+    void PrintInventory()
+    {
+        foreach(KeyValuePair<string ,int> item in inventory)
+        {
+            Debug.Log(item.Key + ": " + item.Value);
+        }
+    }
+    bool CheckInvForItem(Item item)
+    {
+        foreach(string name in inventory.Keys)
+        {
+            if(item.itemName == name)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
