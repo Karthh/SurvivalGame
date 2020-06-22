@@ -18,7 +18,7 @@ public class Item: MonoBehaviour
     }
     private void Start()
     {
-        sprite = GetComponent<SpriteRenderer>().sprite;
+
     }
 
 }

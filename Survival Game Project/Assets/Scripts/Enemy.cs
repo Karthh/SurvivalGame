@@ -131,7 +131,12 @@ public abstract class Enemy : Entity
         {
             if (ableToSpawnItems)
             {
-                Instantiate(ConfigureDropTable(), transform.position, Quaternion.identity);
+                GameObject spawn = ConfigureDropTable();
+                Vector3 oldPos = transform.position;
+                Vector3 futurePos = transform.position + new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), 0);
+                Vector3 targetPos = futurePos + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
+                Instantiate(spawn, futurePos, Quaternion.identity);
+                spawn.GetComponent<Rigidbody2D>().AddForce(targetPos, ForceMode2D.Force);
             }
             if(i + 1 == itemCount)
             {
