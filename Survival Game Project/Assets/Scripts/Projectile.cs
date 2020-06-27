@@ -19,14 +19,23 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         transform.Translate(direction.x * Time.deltaTime * speed, direction.y * Time.deltaTime * speed, 0f);
+        //transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
     }
     public void OnTriggerEnter2D(Collider2D col)
     {
-        animator.SetTrigger("onHit");
-        Destroy(gameObject, 0.1f);
+        if(animator != null)
+        {
+            animator.SetTrigger("onHit");
+            Destroy(gameObject, 0.1f);
+        }
+       
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        animator.SetTrigger("onHit");
+        if(animator != null)
+        {
+            animator.SetTrigger("onHit");
+        }
+        
     }
 }
