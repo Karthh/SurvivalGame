@@ -142,6 +142,7 @@ public class Player : Entity
              //}
              interact = false;
          } */
+        
     }
     public void PlayerInteract()
     {
@@ -219,6 +220,15 @@ public class Player : Entity
             }
             
         }
+        if (col.tag == "Building")
+    {
+            Building buildingScript = col.GetComponent<Building>();
+            if (!buildingScript.built)
+            {
+                buildingScript.Interact(inventory);
+                UpdateInventory(buildingScript.GetRequiredItemKeys(), buildingScript.requiredAmounts);
+            }
+        }
     }
     /// <summary>
     /// Player Attack Method
@@ -294,5 +304,32 @@ public class Player : Entity
             }
         }
         return false;
+    }
+    void UpdateInventory(List<string> itemList, List<int> amounts)
+    {
+        for(int i = 0; i < itemList.Count; i++)
+        {
+            if (inventory.ContainsKey(itemList[i]))
+            {
+                inventory[itemList[i]] = Mathf.Abs(amounts[i]);
+                /*if (inventory[itemList[i]] - amounts[i] > 0)
+                {
+                    inventory[itemList[i]] -= amounts[i];
+                }
+                else if(amounts[i] > 0)
+                {
+                    inventory[itemList[i]] = 0;
+                }*/
+                /*if(amounts[i] == 0)
+                {
+                    inventory[itemList[i]] = 0;
+                }
+                else
+                {
+                    inventory[itemList[i]] -= Mathf.Abs(amounts[i]);
+                }*/
+
+            }
+        }
     }
 }

@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Hitbox
   - NPC
+  - Item
+  - Building
   layers:
   - Default
   - TransparentFX
